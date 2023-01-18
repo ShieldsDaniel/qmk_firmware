@@ -12,6 +12,7 @@ enum tap_dance_codes {
 #define MT_BSPC MT(MOD_LGUI, KC_BSPC)
 #define MT_SPC MEH_T(KC_SPC)
 #define MT_BSLS MT(MOD_LALT, KC_BSLS)
+#define MT_N0 MT(KC_SPC, KC_0)
 #define SCREEN LGUI(S(KC_4))
 #define RECORD LGUI(S(KC_5))
 
@@ -59,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_NO,     KC_F1,     KC_F2,     KC_F3,       KC_F12,           KC_DOT ,     KC_KP_1,     KC_KP_2,      KC_KP_3,      KC_NO,
 // ╰──────────┴──────────┴──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┴─────────────┴──────────╯
 //                                  │  BSPC  GUI │  OSM CTLR   │   │  OSM SHIFT │  0         │
-		    		                  MT_BSPC,    OSM(MOD_RCTL),    OSM(MOD_LSFT), KC_KP_0
+		    		                  MT_BSPC,    OSM(MOD_RCTL),    OSM(MOD_LSFT), MT_N0
 //                                  ╰────────────┴─────────────╯   ╰────────────┴────────────╯
   ),
   [3] = LAYOUT(
