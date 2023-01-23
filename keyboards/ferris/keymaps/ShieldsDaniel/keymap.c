@@ -7,10 +7,10 @@ enum tap_dance_codes {
   TAP_CLN
 };
 
-#define MT_A MT(MOD_LALT, KC_A)
-#define MT_O MT(MOD_RALT, KC_O)
-#define MT_BSPC MT(MOD_LGUI, KC_BSPC)
-#define MT_SPC MEH_T(KC_SPC)
+#define MT_S MT(MOD_LALT, KC_S)
+#define MT_T MT(MOD_LGUI, KC_T)
+#define MT_N MT(MOD_RGUI, KC_N)
+#define MT_E MT(MOD_RALT, KC_E)
 #define MT_BSLS MT(MOD_LALT, KC_BSLS)
 #define MT_N0 MT(KC_SPC, KC_0)
 #define SCREEN LGUI(S(KC_4))
@@ -19,48 +19,49 @@ enum tap_dance_codes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT(
 // ╭──────────┬──────────┬──────────┬────────────┬─────────────╮   ╭────────────┬────────────┬─────────────┬─────────────┬──────────╮
-// │  Q   ESC │  W       │  F       │  P         │  B          │   │  J         │  L         │  U          │  Y          │  ;       │ 
-    TD(TAP_Q),  KC_W,      KC_F,      KC_P,        KC_B,             KC_J,        KC_L,        KC_U,         KC_Y,         KC_SCLN,
+// │  Q   ESC │  W       │  F       │  P         │  B          │   │  J         │  L         │  U          │  Y          │  BSPC    │ 
+    TD(TAP_Q),  KC_W,      KC_F,      KC_P,        KC_B,             KC_J,        KC_L,        KC_U,         KC_Y,         KC_BSPC,
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
 // │  A       │  R       │  S  ALT  │  T  GUI    │  G          │   │  M         │  N   GUI   │  E      ALT │  I          │  O       │
-     MT_A,     LT(1,KC_R),LT(2,KC_S), LT(3,KC_T),  KC_G,             KC_M,        LT(3,KC_N),  LT(2, KC_E),  LT(1, KC_I),  MT_O,
+     KC_A,      KC_R,      MT_S,      MT_T,        KC_G,             MEH_T(KC_M), MT_N,        MT_E,         KC_I,         KC_O,
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
 // │  Z       │  X       │  C       │  D         │  V          │   │  K         │  H         │ , <       ? │ . >       ! │  ENTER   │
      KC_Z,      KC_X,      KC_C,      KC_D,        KC_V,             KC_K,        KC_H,        TD(TAP_COMM), TD(TAP_DOT),  KC_ENTER,
 // ╰──────────┴──────────┴──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┴─────────────┴──────────╯
-//                                  │  BSPC  GUI │  OSM CTLR   │   │  OSM SHIFT │  SPC       │
-		    		                  MT_BSPC,    OSM(MOD_RCTL),    OSM(MOD_LSFT), MT_SPC
+//                                  │  TAB    L1 │  OSM CTLR   │   │  OSM SHIFT │  SPC    L2 │
+		    		                LT(1, KC_TAB), OSM(MOD_RCTL),  OSM(MOD_LSFT), LT(2, KC_SPC)
 //                                  ╰────────────┴─────────────╯   ╰────────────┴────────────╯
   ),
 // TODO: Add Tapdance for euro symbol with KC_4
+// TODO: Add Tapdance for mod taps on {}
   [1] = LAYOUT(
 // ╭──────────┬──────────┬──────────┬────────────┬─────────────╮   ╭────────────┬────────────┬─────────────┬─────────────┬──────────╮
 // │  !       │  @       │  #       │  $         │  %          │   │  ^         │  *         │  *          │  "          │  ;       │ 
      S(KC_1),   S(KC_2),   S(KC_3),   S(KC_4),     S(KC_5),          S(KC_6),     S(KC_7),     S(KC_8),      S(KC_QUOT),   KC_SCLN,
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
 // │  \       │  `       │  [       │  ]         │  -          │   │  =         │  {         │  }          │  '          │  :       │
-     MT_BSLS,   KC_GRV,    KC_LBRC,   KC_RBRC,     KC_MINS,           KC_EQL,     KC_LCBR,     KC_RCBR,      KC_QUOT,    TD(TAP_CLN),
+     KC_BSLS,   KC_GRV,    KC_LBRC,   KC_RBRC,     KC_MINS,           KC_EQL,     KC_LCBR,     KC_RCBR,      KC_QUOT,    TD(TAP_CLN),
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
 // │  |       │  ~       │  <       │  >         │  _          │   │  +         │  (         │  )          │  ?          │  /       │
     S(KC_BSLS), S(KC_GRV),S(KC_COMM), S(KC_DOT),   S(KC_MINS),       S(KC_EQL),   KC_LPRN,     KC_RPRN,      S(KC_SLSH),   KC_SLSH,
 // ╰──────────┴──────────┴──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┴─────────────┴──────────╯
-//                                  │  BSPC  GUI │  OSM CTLR   │   │  OSM SHIFT │  SPC       │
-		    		                  MT_BSPC,    OSM(MOD_RCTL),    OSM(MOD_LSFT), MT_SPC
+//                                  │            │  OSM CTLR   │   │  OSM SHIFT │  SPC    L3 │
+		    		                  KC_NO,      OSM(MOD_RCTL),   OSM(MOD_LSFT), LT(3, KC_SPC)
 //                                  ╰────────────┴─────────────╯   ╰────────────┴────────────╯
   ),
   [2] = LAYOUT(
 // ╭──────────┬──────────┬──────────┬────────────┬─────────────╮   ╭────────────┬────────────┬─────────────┬─────────────┬──────────╮
-// │          │  F7      │  F8      │  F9        │  F10        │   │            │  7         │  8          │  9          │          │ 
-     KC_NO,     KC_F7,     KC_F8,     KC_F9,       KC_F10,           KC_NO,       KC_KP_7,     KC_KP_8,      KC_KP_9,      KC_NO,
+// │          │  F7      │  F8      │  F9        │  F10        │   │  ,         │  7         │  8          │  9          │          │ 
+     KC_NO,     KC_F7,     KC_F8,     KC_F9,       KC_F10,           KC_COMMA,    KC_7,        KC_8,         KC_9,         KC_NO,
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
-// │          │  F4      │  F5      │  F6        │  F11        │   │  ,         │  4         │  5          │  6          │          │
-     KC_NO,     KC_F4,     KC_F5,     KC_F6,       KC_F11,           KC_COMMA,    KC_KP_4,     KC_KP_5,      KC_KP_6,      KC_NO,
+// │          │  F4      │  F5      │  F6        │  F11        │   │  .         │  4         │  5          │  6          │          │
+     KC_NO,     KC_F4,     KC_F5,     KC_F6,       KC_F11,           KC_DOT,      KC_4,        KC_5,         KC_6,         KC_NO,
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
-// │          │  F1      │  F2      │  F3        │  F12        │   │  .         │  1         │  2          │  3          │          │
-     KC_NO,     KC_F1,     KC_F2,     KC_F3,       KC_F12,           KC_DOT ,     KC_KP_1,     KC_KP_2,      KC_KP_3,      KC_NO,
+// │          │  F1      │  F2      │  F3        │  F12        │   │  0         │  1         │  2          │  3          │          │
+     KC_NO,     KC_F1,     KC_F2,     KC_F3,       KC_F12,           KC_0,        KC_1,        KC_2,         KC_3,         KC_NO,
 // ╰──────────┴──────────┴──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┴─────────────┴──────────╯
-//                                  │  BSPC  GUI │  OSM CTLR   │   │  OSM SHIFT │  0         │
-		    		                  MT_BSPC,    OSM(MOD_RCTL),    OSM(MOD_LSFT), MT_N0
+//                                  │  TAB    L3 │  OSM CTLR   │   │  OSM SHIFT │            │
+		    		                LT(3, KC_TAB),OSM(MOD_RCTL),    OSM(MOD_LSFT), KC_NO
 //                                  ╰────────────┴─────────────╯   ╰────────────┴────────────╯
   ),
   [3] = LAYOUT(
@@ -74,8 +75,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // │Bootloader│          │          │            │             │   │  UP        │  LEFT      │             │             │Wheel Down│
      QK_BOOT,   KC_NO,     KC_NO,     KC_NO,       KC_NO,            KC_UP,       KC_LEFT,     KC_NO,        KC_NO,        KC_WH_D,
 // ╰──────────┴──────────┴──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┴─────────────┴──────────╯
-//                                  │  BSPC  GUI │  OSM CTLR   │   │  OSM SHIFT │  SPC       │
-		    		                  MT_BSPC,    OSM(MOD_RCTL),    OSM(MOD_LSFT), MT_SPC
+//                                  │            │  OSM CTLR   │   │  OSM SHIFT │            │
+		    		                  KC_NO,      OSM(MOD_RCTL),    OSM(MOD_LSFT), KC_NO
 //                                  ╰────────────┴─────────────╯   ╰────────────┴────────────╯
   )
 };
