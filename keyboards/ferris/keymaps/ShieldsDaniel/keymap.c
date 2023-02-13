@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,    KC_NO,     SCREEN,    RECORD,      KC_NO,            KC_DOWN,     KC_RIGHT,    KC_MS_U,      KC_BTN3,      KC_WH_U,
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
 // │  Tab     │          │          │            │             │   │ Mouse Left │ MOUSE LEFT │  MOUSE DOWN │ MOUSE RIGHT │MouseRight│
-     KC_TAB,    KC_NO,     KC_NO,     KC_NO,       KC_NO,            KC_BTN1,     KC_MS_L,     KC_MS_D,      KC_MS_R,      KC_BTN2,
+     KC_TAB,    MOD_LSFT,  MOD_LALT,  MOD_LGUI,    MOD_LCTL,         KC_BTN1,     KC_MS_L,     KC_MS_D,      KC_MS_R,      KC_BTN2,
 // ├──────────┼──────────┼──────────┼────────────┼─────────────┤   ├────────────┼────────────┼─────────────┼─────────────┼──────────┤
 // │Bootloader│          │          │            │             │   │  UP        │  LEFT      │             │             │Wheel Down│
      QK_BOOT,   KC_NO,     KC_NO,     KC_NO,       KC_NO,            KC_UP,       KC_LEFT,     KC_NO,        KC_NO,        KC_WH_D,
