@@ -23,6 +23,7 @@
 #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 #    define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #    define ENABLE_RGB_MATRIX_RAINBOW_BEACON 
+#    define ENABLE_RGB_MATRIX_TYPING_HEATMAP
 #endif
 
 // Not yet available in `keymap.json` format
