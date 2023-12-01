@@ -17,9 +17,8 @@
 #include QMK_KEYBOARD_H
 
 #define UMLAUT TD(DANCE_0)
-#define G_L4 LT(4,KC_G)
 #define M_MEH MEH_T(KC_M)
-#define BSPC_L1 LT(_LOWER, KC_BACKSPACE)
+#define G_MEH MEH_T(KC_G)
 #define OSM_CTL OSM(MOD_LCTL)
 #define OSM_SFT OSM(MOD_LSFT)
 #define SPC_L2 LT(_RAISE, KC_SPACE)
@@ -50,35 +49,36 @@ enum sweep_layers {
   _RAISE,
   _ADJUST,
   _NUMBER,
-  _LAYER5,
+  _MEDIA,
+  _RESET,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  W   (ESC)  F       │  P       │  B       │   │  J       │  L       │  U    (ALT) Y       │ Umlaut/ß │
-            KC_Q,      KC_W,      KC_F,      KC_P,      KC_B,          KC_J,      KC_L,      KC_U,      KC_Y,      UMLAUT,
+        //│  Q       │  W   (ESC)  F     (L5) P       │  B       │   │  J       │  L       │  U    (ALT) Y       │  BSPC    │
+            KC_Q,      KC_W,      KC_F,      KC_P,      KC_B,          KC_J,      KC_L,      KC_U,      KC_Y,    KC_BACKSPACE,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  A       │  R       │  S       │  T       │  G    L4 │   │  M   MEH │  N       │  E       │  I       │  O       │
-            KC_A,      KC_R,      KC_S,      KC_T,      G_L4,          M_MEH,     KC_N,      KC_E,      KC_I,      KC_O,
+        //│  A       │  R   (L4)   S       │  T       │  G   MEH │   │  M   MEH │  N       │  E       │  I       │  O       │
+            KC_A,      KC_R,      KC_S,      KC_T,      G_MEH,         M_MEH,     KC_N,      KC_E,      KC_I,      KC_O,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  Z       │  X   (TAB)  C       │  D       │  V       │   │  K       │  H       │  ,    (GUI) .       │  ENTER   │
             KC_Z,      KC_X,      KC_C,      KC_D,      KC_V,          KC_K,      KC_H,      KC_COMMA,  KC_DOT,    KC_ENTER,
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                 │ BSPC  L1 │OSM CTLR (CAPS) OSM SHIFT│ SPC   L2 │
-                                             BSPC_L1,   OSM_CTL,       OSM_SFT,   SPC_L2
+        //                                 │ L1       │OSM CTLR (CAPS) OSM SHIFT│ SPC   L2 │
+                                           MO(_LOWER),  OSM_CTL,       OSM_SFT,   SPC_L2
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
     ),
     [_LOWER] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │          │  <-      │          │   │          │  ===     │  `       │  "       │          │
-            KC_NO,     KC_NO,     KC_NO,     BACK_ARO,  KC_NO,         KC_NO,     JS_EQUALS, KC_GRAVE,  KC_DQUO,   KC_NO,
+        //│          │          │          │          │          │   │          │  ===     │          │  "       │ Umlaut/ß │
+            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,         KC_NO,     JS_EQUALS, KC_NO,     KC_DQUO,   UMLAUT,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  ?       │  ~       │  _       │  -       │  \       │   │  /       │  =       │  +       │  '       │  :       │
             KC_QUES,   KC_TILD,   KC_UNDS,   KC_MINUS,  KC_BSLS,       KC_SLASH,  KC_EQUAL,  KC_PLUS,   KC_QUOTE,  KC_COLN,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │  ~>      │          │  ->      │          │   │          │  =>      │          │          │          │
-            KC_NO,     SQUIG_ARO, KC_NO,     FWRD_ARO,  BACK_PIPE,     KC_NO,     FAT_ARO,   KC_NO,     KC_NO,      KC_NO,
+        //│          │          │          │          │          │   │  ->      │  =>      │  ~>      │  `       │          │
+            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,         FWRD_ARO,  FAT_ARO,   SQUIG_ARO, KC_GRAVE,  KC_NO,
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼── ───────┼──────────┴──────────┴──────────╯
         //                                 │          │          │   │          │          │
                                              KC_NO,     KC_NO,         KC_TRNS,   SPC_L3
@@ -86,29 +86,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_RAISE] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │          │  €       │          │   │  DOWN    │  LEFT    │  <|      │          │          │
-            KC_NO,     KC_NO,     KC_NO,     EURO,      KC_NO,         KC_DOWN,   KC_LEFT,   BACK_PIPE, KC_NO,     KC_NO,
+        //│          │          │          │  €       │          │   │          │          │  <|      │          │          │
+            KC_NO,     KC_NO,     KC_NO,     EURO,      KC_NO,         KC_NO,     KC_NO,     BACK_PIPE, KC_NO,     KC_NO,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  !       │  @       │  #       │  $       │  %       │   │  ^       │  &       │  |       │  *       │  ;       │
             KC_EXLM,   KC_AT,     KC_HASH,   KC_DLR,    KC_PERC,       KC_CIRC,   KC_AMPR,   KC_PIPE,   KC_ASTR,   KC_SCLN,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│          │          │          │          │          │   │  UP      │  RIGHT   │  |>      │          │          │
-            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,         KC_UP,     KC_RIGHT,  FWRD_PIPE, KC_NO,     KC_NO,
+        //│          │          │          │          │          │   │          │          │  |>      │          │          │
+            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,         KC_NO,     KC_NO,     FWRD_PIPE, KC_NO,     KC_NO,
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                 │          │          │   │          │          │
-                                             BSPC_L3,   KC_TRNS,       KC_NO,     KC_NO
+                                           MO(_ADJUST), KC_TRNS,       KC_NO,     KC_NO
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
     ),
     [_ADJUST] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │  Screen  │  Record  │          │   │          │          │          │          │          │
-            RGB_VAI,   RGB_VAD,   SCREEN,    RECORD,    RGB_HUI,       KC_NO,     KC_NO,     KC_NO,     RGB_SPI,   RGB_SPD,
+        //│          │          │  SHIFT   │  ALT     │          │   │  DOWN    │  LEFT    │          │          │          │
+            KC_NO,     KC_NO,    KC_LSFT,    KC_LALT,   KC_NO,         KC_DOWN,   KC_LEFT,   KC_NO,     KC_NO,     KC_NO,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  <       │  [       │  {       │  (       │          │   │          │  )       │  }       │  ]       │  >       │
-            KC_LABK,   KC_LBRC,   KC_LCBR,   KC_LPRN,   RGB_HUD,       KC_NO,     KC_RPRN,   KC_RCBR,   KC_RBRC,   KC_RABK,
+            KC_LABK,   KC_LBRC,   KC_LCBR,   KC_LPRN,   KC_NO,         KC_NO,     KC_RPRN,   KC_RCBR,   KC_RBRC,   KC_RABK,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  L5      │          │          │          │          │   │          │          │          │          │  L5      │
-            KC_0,      RGB_TOG,   KC_NO,     RGB_SAI,   RGB_SAD,       KC_NO,     KC_NO,     RGB_RMOD,  RGB_MOD,   KC_1,
+        //│  L5      │          │  CTRL    │  GUI     │          │   │  UP      │  RIGHT   │          │          │  L5      │
+            KC_0,      KC_NO,     KC_LCTL,   KC_LGUI,   KC_NO,         KC_UP,     KC_RIGHT,  KC_NO,     KC_NO,     KC_1,
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                 │          │          │   │          │          │
                                              KC_NO,     KC_NO,         KC_NO,     KC_NO
@@ -130,16 +130,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              KC_NO,     KC_F12,        KC_DOT,    KC_0
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
     ),
-    [_LAYER5] = LAYOUT(
+    [_MEDIA] = LAYOUT(
+        // TODO: create shorter macros for some of these
+        //╭────────┬────────┬────────┬────────┬────────╮   ╭────────┬─────────────────┬───────────┬───────────┬────────────────────╮
+        //│        │        │        │        │        │   │ SCREEN │ Volume up       │ RGB bright│ RGB fast  │ Bright up          │
+            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,       SCREEN, KC_AUDIO_VOL_UP,   RGB_VAI,    RGB_SPI,    KC_BRIGHTNESS_UP,
+        //├────────┼────────┼────────┼────────┼────────┤   ├────────┼─────────────────┼───────────┼───────────┼────────────────────┤
+        //│        │        │        │        │        │   │        │ Volume down     │ RGB dim   │ RGB slow  │ Bright down        │
+            KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,       KC_NO,  KC_AUDIO_VOL_DOWN, RGB_VAD,    RGB_SPD,    KC_BRIGHTNESS_DOWN,
+        //├────────┼────────┼────────┼────────┼────────┤   ├────────┼─────────────────┼───────────┼───────────┼────────────────────┤
+        //│        │        │        │        │        │   │        │ Mute            │ RGB togg  │ RGB mode  │                    │
+            KC_NO,   KC_F1,   KC_F2,   KC_F3,   KC_NO,       RECORD, KC_AUDIO_MUTE,     RGB_TOG,    RGB_MOD,    KC_NO,
+        //╰────────┴────────┴────────┼────────┼────────┤   ├────────┼─────────────────┼───────────┴───────────┴────────────────────╯
+        //                           │        │        │   │        │                 │
+                                       KC_MPRV, KC_MSTP,     KC_MPLY, KC_MNXT
+        //                           ╰────────┴────────╯   ╰────────┴─────────────────╯
+    ),
+    [_RESET] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │   │          │          │          │          │          │
-            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+            TO(0),     TO(0),     TO(0),     TO(0),     TO(0),         TO(0),     TO(0),     TO(0),     TO(0),     TO(0),
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │   │          │          │          │          │          │
-            TO(0),     TO(0),     TO(0),     TO(0),     KC_NO,         KC_NO,     TO(0),     TO(0),     TO(0),     TO(0),
+            TO(0),     TO(0),     TO(0),     TO(0),     TO(0),         TO(0),     TO(0),     TO(0),     TO(0),     TO(0),
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │          │          │   │          │          │          │          │          │
-            BOOT,      KC_NO,    KC_NO,     KC_NO,     KC_NO,         KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+            BOOT,      TO(0),     TO(0),     TO(0),     TO(0),         TO(0),     TO(0),     TO(0),     TO(0),     TO(0),
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                 │          │          │   │          │          │
                                              TO(0),     TO(0),         TO(0),     TO(0)
@@ -151,16 +167,18 @@ const uint16_t PROGMEM combo0[] = { KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM combo1[] = { KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM combo2[] = { KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM combo3[] = { KC_R, KC_S, COMBO_END};
-const uint16_t PROGMEM combo4[] = { KC_0, KC_1, COMBO_END};
-const uint16_t PROGMEM combo5[] = { KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM combo4[] = { KC_F, KC_P, COMBO_END};
+const uint16_t PROGMEM combo5[] = { KC_1, KC_2, COMBO_END};
+const uint16_t PROGMEM combo6[] = { KC_X, KC_C, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(combo0, OSM(MOD_LGUI)),
     COMBO(combo1, OSM(MOD_LALT)),
     COMBO(combo2, KC_ESCAPE),
     COMBO(combo3, MO(_NUMBER)),
-    COMBO(combo4, TO(5)),
-    COMBO(combo5, KC_TAB),
+    COMBO(combo4, MO(_MEDIA)),
+    COMBO(combo5, TO(_RESET)),
+    COMBO(combo6, KC_TAB),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
