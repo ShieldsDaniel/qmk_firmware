@@ -3,12 +3,9 @@
 
 #pragma once
 
-#include "config_common.h"
-
 #undef TAPPING_TERM
 #define TAPPING_TERM 200
 #define RETRO_TAPPING
-
 
 #undef MOUSEKEY_DELAY
 #define MOUSEKEY_DELAY 5

@@ -28,11 +28,10 @@
 #define PASTE LCTL(KC_V)
 
 enum shields40_keycodes {
-  BACK_ARROW = SAFE_RANGE,
   JS_EQUALS,
-  SQUIGGLY_ARROW,
-  FORWARD_ARROW,
-  FAT_ARROW,
+  SQUIG_ARO,
+  FWRD_ARO,
+  FAT_ARO,
   BACK_PIPE,
   FORWARD_PIPE,
 };
@@ -53,7 +52,7 @@ enum shields40_layers {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_BASE] = LAYOUT_shields40(
+    [_BASE] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│  Q       │  W    (ESC) F       │  P       │  B       │  J       │  L       │  U     (ALT) Y      │  BSPC    │
             KC_Q,      KC_W,      KC_F,      KC_P,      KC_B,      KC_J,      KC_L,      KC_U,      KC_Y,      KC_BSPC,
@@ -68,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             MEDIA,     KC_NO,     NUMBER,    LOWER,     OSM_CTL,   OSM_SFT,   SPC_L2,    LINUX,     KC_NO,     KC_DEL
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
-    [_LOWER] = LAYOUT_shields40(
+    [_LOWER] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │          │  ===     │          │  "       │ Umlaut/ß │
             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     JS_EQUALS, KC_NO,     KC_DQUO,   UMLAUT,
@@ -77,13 +76,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_QUES,   KC_TILD,   KC_UNDS,   KC_MINUS,  KC_BSLS,   KC_SLASH,  KC_EQUAL,  KC_PLUS,   KC_QUOTE,  KC_COLN,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │  ->      │  =>      │  ~>      │  `       │          │
-            KC_NO,     KC_NO,     KC_NO,     KC_NO,     BACK_PIPE, FWRD_ARO,  FAT_ARROW, SQUIG_ARO, KC_GRAVE,  KC_NO,
+            KC_NO,     KC_NO,     KC_NO,     KC_NO,     BACK_PIPE, FWRD_ARO,  FAT_ARO,   SQUIG_ARO, KC_GRAVE,  KC_NO,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //           │          │          │          │          │          │ SPC  L2  │          │          │          │
-            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRANS,  SPC_L3,    KC_NO,     KC_NO,     KC_NO
+        //           │          │          │          │          │          │  SPC  L2 │          │          │          │
+            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,   SPC_L3,    KC_NO,     KC_NO,     KC_NO
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
-    [_RAISE] = LAYOUT_shields40(
+    [_RAISE] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │  €       │          │          │          │  <|      │          │          │
             KC_NO,     KC_NO,     KC_NO,     EURO,      KC_NO,     KC_NO,     KC_NO,     BACK_PIPE, KC_NO,     KC_NO,
@@ -98,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_NO,     KC_NO,     KC_NO,     ADJUST,    KC_TRNS,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
-    [_ADJUST] = LAYOUT_shields40(
+    [_ADJUST] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│  Control │  Alt     │  Super   │  Shift   │          │  DOWN    │  LEFT    │          │          │          │
             KC_LCTL,   KC_LALT,   KC_LGUI,   KC_LSFT,   KC_NO,     KC_DOWN,   KC_LEFT,   KC_NO,     KC_NO,    KC_NO,
@@ -113,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,    KC_NO
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
-    [_NUMBER] = LAYOUT_shields40(
+    [_NUMBER] = LAYOUT(
         //
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │  F7      │  F8      │  F9      │  F10     │          │  7       │  8       │  9       │          │
@@ -129,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,   KC_DOT,    KC_0,      KC_NO,     KC_NO,    KC_NO
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
-    [_MEDIA] = LAYOUT_shields40(
+    [_MEDIA] = LAYOUT(
         //
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │Screenshot│  Vol up  │          │          │Bright up │
@@ -145,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_NO,     KC_NO,     KC_NO,     KC_MPRV,   KC_MSTP,   KC_MPLY,   KC_MNXT,    KC_NO,    KC_NO,    KC_NO
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
-    [_LINUX] = LAYOUT_shields40(
+    [_LINUX] = LAYOUT(
         //
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │          │          │          │          │          │
@@ -161,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
-    [_RESET] = LAYOUT_shields40(
+    [_RESET] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │          │          │          │          │          │          │          │
             TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),
@@ -173,7 +172,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             BOOT,      TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //           │          │          │          │          │          │          │          │          │          │
-            TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),
+            TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0),     TO(0)
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     )
 };
@@ -185,7 +184,7 @@ const uint16_t PROGMEM combo2[] = { KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM combo3[] = { OSM(MOD_LSFT), OSM(MOD_LCTL), COMBO_END};
 const uint16_t PROGMEM combo4[] = { KC_0, KC_1, COMBO_END};
 const uint16_t PROGMEM combo5[] = { KC_X, KC_C, COMBO_END};
-combo_t key_combos[COMBO_COUNT] = {
+combo_t key_combos[6] = {
     COMBO(combo0, OSM(MOD_LGUI)),
     COMBO(combo1, OSM(MOD_LALT)),
     COMBO(combo2, KC_ESCAPE),
@@ -197,31 +196,25 @@ combo_t key_combos[COMBO_COUNT] = {
 // MACROS:
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case BACK_ARROW:
-            if (record->event.pressed) {
-                SEND_STRING("<-");
-            }
-            break;
-
         case JS_EQUALS:
             if (record->event.pressed) {
                 SEND_STRING("===");
             }
             break;
 
-        case SQUIGGLY_ARROW:
+        case SQUIG_ARO:
             if (record->event.pressed) {
                 SEND_STRING("~>");
             }
             break;
 
-        case FORWARD_ARROW:
+        case FWRD_ARO:
             if (record->event.pressed) {
                 SEND_STRING("->");
             }
             break;
 
-        case FAT_ARROW:
+        case FAT_ARO:
             if (record->event.pressed) {
                 SEND_STRING("=>");
             }
@@ -259,9 +252,9 @@ enum {
 
 static tap dance_state[1];
 
-uint8_t dance_step(qk_tap_dance_state_t *state);
+uint8_t dance_step(tap_dance_state_t *state);
 
-uint8_t dance_step(qk_tap_dance_state_t *state) {
+uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return SINGLE_TAP;
         else return SINGLE_HOLD;
@@ -274,11 +267,11 @@ uint8_t dance_step(qk_tap_dance_state_t *state) {
 }
 
 
-void on_dance_0(qk_tap_dance_state_t *state, void *user_data);
-void dance_0_finished(qk_tap_dance_state_t *state, void *user_data);
-void dance_0_reset(qk_tap_dance_state_t *state, void *user_data);
+void on_dance_0(tap_dance_state_t *state, void *user_data);
+void dance_0_finished(tap_dance_state_t *state, void *user_data);
+void dance_0_reset(tap_dance_state_t *state, void *user_data);
 
-void on_dance_0(qk_tap_dance_state_t *state, void *user_data) {
+void on_dance_0(tap_dance_state_t *state, void *user_data) {
     if(state->count == 3) {
         tap_code16(LALT(KC_U));
         tap_code16(LALT(KC_U));
@@ -289,7 +282,7 @@ void on_dance_0(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_0_finished(qk_tap_dance_state_t *state, void *user_data) {
+void dance_0_finished(tap_dance_state_t *state, void *user_data) {
     dance_state[0].step = dance_step(state);
     switch (dance_state[0].step) {
         case SINGLE_TAP: register_code16(LALT(KC_U)); break;
@@ -299,7 +292,7 @@ void dance_0_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void dance_0_reset(qk_tap_dance_state_t *state, void *user_data) {
+void dance_0_reset(tap_dance_state_t *state, void *user_data) {
     wait_ms(10);
     switch (dance_state[0].step) {
         case SINGLE_TAP: unregister_code16(LALT(KC_U)); break;
@@ -310,7 +303,7 @@ void dance_0_reset(qk_tap_dance_state_t *state, void *user_data) {
     dance_state[0].step = 0;
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [DANCE_0] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_0, dance_0_finished, dance_0_reset),
 };
 
