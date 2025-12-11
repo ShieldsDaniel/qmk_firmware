@@ -5,9 +5,6 @@
 
 #include "config_common.h"
 
-#define IGNORE_MOD_TAP_INTERRUPT
-#define COMBO_COUNT 6
-#define TAPPING_FORCE_HOLD
 #undef TAPPING_TERM
 #define TAPPING_TERM 200
 #define RETRO_TAPPING
