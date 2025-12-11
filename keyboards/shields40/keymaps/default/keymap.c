@@ -28,12 +28,12 @@
 #define PASTE LCTL(KC_V)
 
 enum shields40_keycodes {
-  JS_EQUALS,
+  JS_EQUALS = SAFE_RANGE,
   SQUIG_ARO,
   FWRD_ARO,
   FAT_ARO,
   BACK_PIPE,
-  FORWARD_PIPE,
+  FWRD_PIPE,
 };
 
 enum tap_dance_codes {
@@ -57,14 +57,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //│  Q       │  W    (ESC) F       │  P       │  B       │  J       │  L       │  U     (ALT) Y      │  BSPC    │
             KC_Q,      KC_W,      KC_F,      KC_P,      KC_B,      KC_J,      KC_L,      KC_U,      KC_Y,      KC_BSPC,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  A       │  R       │  S       │  T       │  G    L4 │  M   MEH │  N       │  E       │  I       │  O       │
+        //│  A       │  R       │  S       │  T       │  G    L4 │  M   L4  │  N       │  E       │  I       │  O       │
             KC_A,      KC_R,      KC_S,      KC_T,      G_SUPER,   M_SUPER,   KC_N,      KC_E,      KC_I,      KC_O,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  Z       │  X    (TAB) C       │  D       │  V       │  K       │  H       │  ,     (GUI) .      │  ENTER   │
             KC_Z,      KC_X,      KC_C,      KC_D,      KC_V,      KC_K,      KC_H,      KC_COMMA,  KC_DOT,    KC_ENTER,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
-        //   MEDIA   │          │  NUMBER  │  LOWER   │ OSM CTLR │OSM SHIFT │ SPC RAISE│  LINUX   │          │          │
-            MEDIA,     KC_NO,     NUMBER,    LOWER,     OSM_CTL,   OSM_SFT,   SPC_L2,    LINUX,     KC_NO,     KC_DEL
+        //   MEDIA   │  MEH     │  NUMBER  │  LOWER   │ OSM CTLR │OSM SHIFT │ SPC RAISE│  LINUX   │  MEH     │          │
+            MEDIA,     KC_MEH,    NUMBER,    LOWER,     OSM_CTL,   OSM_SFT,   SPC_L2,    LINUX,     KC_MEH,    KC_DEL
         //╰──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────┴──────────╯
     ),
     [_LOWER] = LAYOUT(
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_QUES,   KC_TILD,   KC_UNDS,   KC_MINUS,  KC_BSLS,   KC_SLASH,  KC_EQUAL,  KC_PLUS,   KC_QUOTE,  KC_COLN,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │  ->      │  =>      │  ~>      │  `       │          │
-            KC_NO,     KC_NO,     KC_NO,     KC_NO,     BACK_PIPE, FWRD_ARO,  FAT_ARO,   SQUIG_ARO, KC_GRAVE,  KC_NO,
+            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     FWRD_ARO,  FAT_ARO,   SQUIG_ARO, KC_GRAVE,  KC_NO,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //           │          │          │          │          │          │  SPC  L2 │          │          │          │
             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_TRNS,   SPC_L3,    KC_NO,     KC_NO,     KC_NO
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_EXLM,   KC_AT,     KC_HASH,   KC_DLR,    KC_PERC,   KC_CIRC,   KC_AMPR,   KC_PIPE,   KC_ASTR,   KC_SCLN,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          │          │          │  |>      │          │          │
-            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,   FORWARD_PIPE,KC_NO,     KC_NO,
+            KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,    FWRD_PIPE,  KC_NO,     KC_NO,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //           │          │          │  Adjust  │          │          │          │          │          │          │
             KC_NO,     KC_NO,     KC_NO,     ADJUST,    KC_TRNS,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO
@@ -226,7 +226,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-        case FORWARD_PIPE:
+        case FWRD_PIPE:
             if (record->event.pressed) {
                 SEND_STRING("|>");
             }
