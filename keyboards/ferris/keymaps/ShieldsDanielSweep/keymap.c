@@ -1,4 +1,4 @@
-// SplitKB Aurora Sweep keyboard
+// Ferris Sweep keyboard
 #include QMK_KEYBOARD_H
 
 #define UMLAUT TD(GERMAN)
