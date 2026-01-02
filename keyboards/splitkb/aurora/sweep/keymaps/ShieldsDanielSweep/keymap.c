@@ -165,15 +165,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // MACROS
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case BACK_ARO:
-            if (record->event.pressed) {
-                SEND_STRING("<-");
-            }
-            break;
-
         case JS_EQUALS:
             if (record->event.pressed) {
                 SEND_STRING("===");
+            }
+            break;
+
+        case BACK_ARO:
+            if (record->event.pressed) {
+                SEND_STRING("<-");
             }
             break;
 
