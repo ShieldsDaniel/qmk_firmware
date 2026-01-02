@@ -1,4 +1,4 @@
-TAP_DANCE_ENABLE = yes
+# TAP_DANCE_ENABLE = yes
 COMBO_ENABLE = yes
 CONVERT_TO = elite_pi
 OLED_ENABLE = yes
