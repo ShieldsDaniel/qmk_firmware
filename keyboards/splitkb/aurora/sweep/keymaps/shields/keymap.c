@@ -1,18 +1,11 @@
 // SplitKB Aurora Sweep keyboard
 #include QMK_KEYBOARD_H
 
-#define M_MEH MEH_T(KC_M)
-#define G_MEH MEH_T(KC_G)
-#define B_GUI LGUI_T(KC_B)
-#define J_GUI LGUI_T(KC_J)
-#define G_GUI LGUI_T(KC_G)
-#define M_GUI LGUI_T(KC_M)
-#define V_ALT LALT_T(KC_V)
-#define K_ALT LALT_T(KC_K)
 #define OSM_CTL OSM(MOD_LCTL)
 #define OSM_SFT OSM(MOD_LSFT)
 #define OSM_GUI OSM(MOD_LGUI)
 #define OSM_ALT OSM(MOD_LALT)
+#define BSPC_LOWER LT(_LOWER, KC_BSPC)
 #define SPC_RAISE LT(_RAISE, KC_SPACE)
 #define EURO LALT(LSFT(KC_2))
 #define SCREEN LGUI(LSFT(KC_4))
@@ -23,6 +16,10 @@
 #define BRIGHTER KC_BRIGHTNESS_UP
 #define DIMMER KC_BRIGHTNESS_DOWN
 #define BOOT QK_BOOTLOADER
+#define UMLAUT LALT(KC_U)
+#define GERMAN_S LALT(KC_S)
+
+// MACROS & LAYERS
 
 enum macro_keycodes {
   BACK_ARO = SAFE_RANGE,
@@ -32,7 +29,6 @@ enum macro_keycodes {
   FAT_ARO,
   BACK_PIPE,
   FWRD_PIPE,
-  CHECK_OS,
 };
 
 enum keyboard_layers {
@@ -44,29 +40,30 @@ enum keyboard_layers {
   _FUNC,
   _MEDIA,
   _RESET,
-  _LINUX,
 };
+
+// KEYMAP
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_MAC] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  W  (MEDIA) F       │  P       │  B  (GUI)││  J  (GUI)│  L       │  U   (FUNC) Y       │  BSPC    │
-            KC_Q,      KC_W,      KC_F,      KC_P,      B_GUI,      J_GUI,     KC_L,      KC_U,      KC_Y,      KC_BSPC,
+        //│  Q       │  W       │  F       │  P       │  B       ││  J       │  L       │  U       │  Y       │  BSPC    │
+            KC_Q,      KC_W,      KC_F,      KC_P,      KC_B,       KC_J,      KC_L,      KC_U,      KC_Y,      KC_BSPC,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  A       │  R       │  S       │  T       │  G  (MEH)││  M  (MEH)│  N       │  E       │  I       │  O       │
-            KC_A,      KC_R,      KC_S,      KC_T,      G_MEH,      M_MEH,     KC_N,      KC_E,      KC_I,      KC_O,
+        //│  A       │  R       │  S       │  T       │  G       ││  M       │  N       │  E       │  I       │  O       │
+            KC_A,      KC_R,      KC_S,      KC_T,      KC_G,       KC_M,      KC_N,      KC_E,      KC_I,      KC_O,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  Z       │  X   (NUM)  C       │  D       │  V  (ALT)││  K  (ALT)│  H       │  ,(SHORTCUTS).      │  ENTER   │
-            KC_Z,      KC_X,      KC_C,      KC_D,      V_ALT,      K_ALT,     KC_H,      KC_COMM,   KC_DOT,    KC_ENT,
+        //│  Z       │  X       │  C       │  D       │  V       ││  K       │  H       │  ,       │  .       │  ENTER   │
+            KC_Z,      KC_X,      KC_C,      KC_D,      KC_V,       KC_K,      KC_H,      KC_COMM,   KC_DOT,    KC_ENT,
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┴──────────┴──────────╯
         //                                 │ LOWER    │  CTLR    ││  SHIFT   │SPC(RAISE)│
-                                            MO(_LOWER), OSM_CTL,    OSM_SFT,   SPC_RAISE
+                                            BSPC_LOWER, OSM_CTL,    OSM_SFT,   SPC_RAISE
         //                                 ╰──────────┴──────────╯╰──────────┴──────────╯
     ),
     [_LOWER] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│          │          │          │  Umlaut  │  ß       ││          │  ===     │          │  "       │  BSPC    │
-            KC_NO,     KC_NO,     KC_NO,    LALT(KC_U), LALT(KC_S), KC_NO,    JS_EQUALS,  KC_NO,     KC_DQUO,   KC_BSPC,
+            KC_NO,     KC_NO,     KC_NO,     UMLAUT,    GERMAN_S,   KC_NO,    JS_EQUALS,  KC_NO,     KC_DQUO,   KC_BSPC,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  ?       │  ~       │  _       │  -       │  \       ││  /       │  =       │  +       │  '       │  :       │
             KC_QUES,   KC_TILD,   KC_UNDS,   KC_MINS,   KC_BSLS,    KC_SLSH,   KC_EQL,    KC_PLUS,   KC_QUOT,   KC_COLN,
@@ -168,24 +165,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                              TO(_MAC) , TO(_MAC) ,  TO(_MAC) , TO(_MAC)
         //                                 ╰──────────┴──────────╯╰──────────┴──────────╯
     ),
-    [_LINUX] = LAYOUT(
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  W  (MEDIA) F       │  P       │  B  (GUI)││  J  (GUI)│  L       │  U   (FUNC) Y       │  BSPC    │
-            KC_Q,      KC_W,      KC_F,      KC_P,      B_GUI,      J_GUI,     KC_L,      KC_U,      KC_Y,      KC_BSPC,
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  A       │  R       │  S       │  T       │  G  (GUI)││  M  (GUI)│  N       │  E       │  I       │  O       │
-            KC_A,      KC_R,      KC_S,      KC_T,      G_GUI,      M_GUI,     KC_N,      KC_E,      KC_I,      KC_O,
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  Z       │  X   (NUM)  C       │  D       │  V  (ALT)││  K  (ALT)│  H       │  ,(SHORTCUTS).      │  ENTER   │
-            KC_Z,      KC_X,      KC_C,      KC_D,      V_ALT,      K_ALT,     KC_H,      KC_COMM,   KC_DOT,    KC_ENT,
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                 │ LOWER    │  CTLR    ││  SHIFT   │SPC(RAISE)│
-                                            MO(_LOWER), OSM_CTL,    OSM_SFT,   SPC_RAISE
-        //                                 ╰──────────┴──────────╯╰──────────┴──────────╯
-    )
 };
 
 // MACROS
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case JS_EQUALS:
@@ -230,67 +213,57 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
-        case CHECK_OS:
-            if (record->event.pressed) {
-                if (get_highest_layer(layer_state) == _MAC) {
-                    SEND_STRING("mac");
-                } else if (get_highest_layer(layer_state) == _LINUX) {
-                    SEND_STRING("linux");
-                }
-            }
-            break;
     }
     return true;
 }
 
 // COMBOS
+
 enum combos {
-    TO_MAC = 0,
-    TO_LINUX,
-    OS_CHECK,
-    NUM_TAB,
-    MEDIA_ESC,
-    FUNC_DEL,
-    MAC_SHORTCUTS,
-    LINUX_SHORTCUTS,
-    RESET,
+    MEDIA = 0,
+    ESC,
+    NUM,
+    DEL,
+    FUNC,
+    TAB,
+    SHORTCUTS,
+    L_SUPER,
+    R_SUPER,
+    L_GUI,
+    R_GUI,
+    L_ALT,
+    R_ALT,
+    TO_RESET,
 };
 
-const uint16_t PROGMEM mac_combo[] = {KC_Q, KC_BSPC, COMBO_END};
-const uint16_t PROGMEM linux_combo[] = {KC_Q, KC_BSPC, COMBO_END};
-const uint16_t PROGMEM os_check_combo[] = {KC_Z, KC_ENT, COMBO_END};
-const uint16_t PROGMEM num_tab_combo[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM media_esc_combo[] = {KC_W, KC_F, COMBO_END};
-const uint16_t PROGMEM func_del_combo[] = {KC_U, KC_Y, COMBO_END};
-const uint16_t PROGMEM mac_shortcuts_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
-const uint16_t PROGMEM linux_shortcuts_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
-const uint16_t PROGMEM reset_combo[] = {KC_R, KC_S, KC_T, KC_N, KC_E, KC_I, COMBO_END};
+const uint16_t PROGMEM media_combo[]        = { KC_W, KC_F, KC_P,                       COMBO_END};
+const uint16_t PROGMEM esc_combo[]          = { KC_W, KC_F,                             COMBO_END};
+const uint16_t PROGMEM num_combo[]          = { KC_X, KC_C,                             COMBO_END};
+const uint16_t PROGMEM del_combo[]          = { KC_X, KC_C, KC_D,                       COMBO_END};
+const uint16_t PROGMEM func_combo[]         = { KC_L, KC_U, KC_Y,                       COMBO_END};
+const uint16_t PROGMEM tab_combo[]          = { KC_U, KC_Y,                             COMBO_END};
+const uint16_t PROGMEM shortcuts_combo[]    = { KC_COMM, KC_DOT,                        COMBO_END};
+const uint16_t PROGMEM l_super_combo[]      = { KC_R, KC_S, KC_T,                       COMBO_END};
+const uint16_t PROGMEM r_super_combo[]      = { KC_N, KC_E, KC_I,                       COMBO_END};
+const uint16_t PROGMEM l_gui_combo[]        = { KC_P, KC_B,                             COMBO_END};
+const uint16_t PROGMEM r_gui_combo[]        = { KC_J, KC_L,                             COMBO_END};
+const uint16_t PROGMEM l_alt_combo[]        = { KC_D, KC_V,                             COMBO_END};
+const uint16_t PROGMEM r_alt_combo[]        = { KC_K, KC_H,                             COMBO_END};
+const uint16_t PROGMEM reset_combo[]        = { KC_Q, KC_W, KC_F, KC_U, KC_Y, KC_ENTER, COMBO_END};
 
 combo_t key_combos[] = {
-    [TO_MAC] = COMBO(mac_combo, TO(_MAC)),
-    [TO_LINUX] = COMBO(linux_combo, TO(_LINUX)),
-    [OS_CHECK] = COMBO(os_check_combo, CHECK_OS),
-    [NUM_TAB] = COMBO(num_tab_combo, LT(_NUM, KC_TAB)),
-    [MEDIA_ESC] = COMBO(media_esc_combo, LT(_MEDIA, KC_ESC)),
-    [FUNC_DEL] = COMBO(func_del_combo, LT(_FUNC, KC_DEL)),
-    [MAC_SHORTCUTS] = COMBO(mac_shortcuts_combo, OSM(MOD_LGUI)),
-    [LINUX_SHORTCUTS] = COMBO(linux_shortcuts_combo, OSM(MOD_LCTL)),
-    [RESET] = COMBO(reset_combo, TO(_RESET)),
+    [MEDIA]         = COMBO(media_combo,        MO(_FUNC)),
+    [ESC]           = COMBO(esc_combo,          KC_ESC),
+    [NUM]           = COMBO(num_combo,          MO(_NUM)),
+    [TAB]           = COMBO(tab_combo,          KC_TAB),
+    [FUNC]          = COMBO(func_combo,         MO(_FUNC)),
+    [DEL]           = COMBO(del_combo,          KC_DEL),
+    [SHORTCUTS]     = COMBO(shortcuts_combo,    OSM(MOD_LCTL)),
+    [L_SUPER]       = COMBO(l_super_combo,      OSM(MOD_MEH)),
+    [R_SUPER]       = COMBO(r_super_combo,      OSM(MOD_MEH)),
+    [L_GUI]         = COMBO(l_gui_combo,        OSM(MOD_LGUI)),
+    [R_GUI]         = COMBO(r_gui_combo,        OSM(MOD_RGUI)),
+    [L_ALT]         = COMBO(l_alt_combo,        OSM(MOD_LALT)),
+    [R_ALT]         = COMBO(r_alt_combo,        OSM(MOD_RALT)),
+    [TO_RESET]      = COMBO(reset_combo,        TO(_RESET)),
 };
-
-bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    switch (combo_index) {
-        case TO_LINUX:
-        case MAC_SHORTCUTS:
-        case RESET:
-            return get_highest_layer(layer_state) == _MAC;
-            break;
-
-        case TO_MAC:
-        case LINUX_SHORTCUTS:
-            return get_highest_layer(layer_state) == _LINUX;
-            break;
-    }
-
-    return true;
-}
