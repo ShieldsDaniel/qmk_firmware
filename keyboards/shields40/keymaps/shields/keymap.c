@@ -14,10 +14,6 @@
 #define BRIGHTER KC_BRIGHTNESS_UP
 #define DIMMER KC_BRIGHTNESS_DOWN
 #define BOOT QK_BOOTLOADER
-// MAC SPECIFIC. TODO: get the linux variations
-// #define EURO LALT(LSFT(KC_2))
-// #define SCREEN LGUI(LSFT(KC_4))
-// #define RECORD LGUI(LSFT(KC_5))
 
 enum macro_keycodes {
   BACK_ARO = SAFE_RANGE,
@@ -43,7 +39,7 @@ enum keyboard_layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  W  (MEDIA) F       │  P       │  B       │  J       │  L       │  U   (FUNC) Y       │  BSPC    │
+        //│  Q       │  W       │  F       │  P       │  B       │  J       │  L       │  U   (FUNC) Y       │  BSPC    │
             KC_Q,      KC_W,      KC_F,      KC_P,      KC_B,      KC_J,      KC_L,      KC_U,      KC_Y,      KC_BSPC,
         //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  A       │  R       │  S       │  T       │  G  (MEH)│  M  (MEH)│  N       │  E       │  I       │  O       │

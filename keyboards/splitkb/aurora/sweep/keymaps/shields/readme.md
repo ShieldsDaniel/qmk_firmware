@@ -53,8 +53,8 @@ Maybe (s)agc
 ### More difficult (but still usable)
 
 * f + p => 
-* l + u => 
 * c + d => 
+* l + u => 
 * h + , => ` / ~
 
 ### Hard but OK for less used stuff
