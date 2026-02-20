@@ -64,23 +64,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_LOWER] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │  Umlaut  │  ß       │          ││          │          │          │  "       │  BSPC    │
-            KC_NO,     KC_NO,     UMLAUT,    GERMAN_S,  KC_NO,      KC_NO,     KC_NO,     KC_NO,     KC_DQUO,   KC_BSPC,
+        //│          │          │  Umlaut  │  ß       │          ││          │          │          │  "       │          │
+            KC_NO,     KC_NO,     UMLAUT,    GERMAN_S,  KC_NO,      KC_NO,     KC_NO,     KC_NO,     KC_DQUO,   KC_NO,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  ?       │  ~       │  _       │  -       │  \       ││  /       │  =       │  +       │  '       │  :       │
             KC_QUES,   KC_TILD,   KC_UNDS,   KC_MINS,   KC_BSLS,    KC_SLSH,   KC_EQL,    KC_PLUS,   KC_QUOT,   KC_COLN,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│          │          │          │          │          ││  ->      │  =>      │          │  `       │          │
             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,      FWRD_ARO,  FAT_ARO,   KC_NO,     KC_GRV,    KC_NO,
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤├──────────┼── ───────┼──────────┴──────────┴──────────╯
-        //                                 │ XXXXXXXX │          ││          │  ADJUST  │
-                                             KC_NO,     KC_NO,      KC_NO,    MO(_ADJUST)
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┴──────────┴──────────╯
+        //                                 │ XXXXXXXX │          ││  BSPC    │  ADJUST  │
+                                             KC_NO,     KC_NO,      KC_BSPC,  MO(_ADJUST)
         //                                 ╰──────────┴──────────╯╰──────────┴─── ──────╯
     ),
     [_RAISE] = LAYOUT(
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│          │          │          │  €       │          ││          │          │          │          │  BSPC    │
-            KC_NO,     KC_NO,     KC_NO,     EURO,      KC_NO,      KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_BSPC,
+        //│          │          │          │  €       │          ││          │          │          │          │          │
+            KC_NO,     KC_NO,     KC_NO,     EURO,      KC_NO,      KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         //├──────────┼──────────┼──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  !       │  @       │  #       │  $       │  %       ││  ^       │  &       │  |       │  *       │  ;       │
             KC_EXLM,   KC_AT,     KC_HASH,   KC_DLR,    KC_PERC,    KC_CIRC,   KC_AMPR,   KC_PIPE,   KC_ASTR,   KC_SCLN,
@@ -88,8 +88,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //│          │          │          │          │          ││          │          │          │          │          │
             KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,      KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤├──────────┼──────────┼──────────┴──────────┴──────────╯
-        //                                 │  ADJUST  │          ││          │ XXXXXXXX │
-                                           MO(_ADJUST), KC_NO,      KC_NO,     KC_NO
+        //                                 │  ADJUST  │  ENTER   ││          │ XXXXXXXX │
+                                           MO(_ADJUST), KC_ENT,     KC_NO,     KC_NO
         //                                 ╰──────────┴──────────╯╰──────────┴──────────╯
     ),
     [_ADJUST] = LAYOUT(
@@ -185,6 +185,54 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             break;
 
+        case S_LABK:
+            if (record->tap.count > 0) {
+                if (record->event.pressed) {
+                    register_code16(KC_LABK);
+                } else {
+                    unregister_code16(KC_LABK);
+                }
+            } else {
+                if (record->event.pressed) {
+                    register_code16(KC_LEFT_SHIFT);
+                } else {
+                    unregister_code16(KC_LEFT_SHIFT);
+                }
+            }
+            return false;
+
+        case G_LCBR:
+            if (record->tap.count > 0) {
+                if (record->event.pressed) {
+                    register_code16(KC_LCBR);
+                } else {
+                    unregister_code16(KC_LCBR);
+                }
+            } else {
+                if (record->event.pressed) {
+                    register_code16(KC_LEFT_GUI);
+                } else {
+                    unregister_code16(KC_LEFT_GUI);
+                }
+            }
+            return false;
+
+        case C_LPRN:
+            if (record->tap.count > 0) {
+                if (record->event.pressed) {
+                    register_code16(KC_LPRN);
+                } else {
+                    unregister_code16(KC_LPRN);
+                }
+            } else {
+                if (record->event.pressed) {
+                    register_code16(KC_LEFT_CTRL);
+                } else {
+                    unregister_code16(KC_LEFT_CTRL);
+                }
+            }
+            return false;
+
     }
     return true;
 }
@@ -195,19 +243,19 @@ enum combos {
     MEDIA = 0,
     ESC,
     NUM,
-    DEL,
-    FUNC,
     TAB,
+    FUNC,
+    DEL,
     SHORTCUTS,
 };
 
-const uint16_t PROGMEM w_f_p_combo[]    = { KC_W, KC_F, KC_P,   COMBO_END};
-const uint16_t PROGMEM w_f_combo[]      = { KC_W, KC_F,         COMBO_END};
-const uint16_t PROGMEM r_s_combo[]      = { KC_R, KC_S,         COMBO_END};
-const uint16_t PROGMEM x_c_combo[]      = { KC_X, KC_C,         COMBO_END};
-const uint16_t PROGMEM l_u_y_combo[]    = { KC_L, KC_U, KC_Y,   COMBO_END};
-const uint16_t PROGMEM u_y_combo[]      = { KC_U, KC_Y,         COMBO_END};
-const uint16_t PROGMEM comm_dot_combo[] = { KC_COMM, KC_DOT,    COMBO_END};
+const uint16_t PROGMEM w_f_p_combo[]    = { KC_W, KC_F, KC_P,                       COMBO_END};
+const uint16_t PROGMEM w_f_combo[]      = { KC_W, KC_F,                             COMBO_END};
+const uint16_t PROGMEM r_s_combo[]      = { MT(MOD_LALT, KC_R), MT(MOD_LGUI, KC_S), COMBO_END};
+const uint16_t PROGMEM x_c_combo[]      = { KC_X, KC_C,                             COMBO_END};
+const uint16_t PROGMEM l_u_y_combo[]    = { KC_L, KC_U, KC_Y,                       COMBO_END};
+const uint16_t PROGMEM u_y_combo[]      = { KC_U, KC_Y,                             COMBO_END};
+const uint16_t PROGMEM comm_dot_combo[] = { KC_COMM, KC_DOT,                        COMBO_END};
 
 combo_t key_combos[] = {
     [MEDIA]     = COMBO(w_f_p_combo,    MO(_FUNC)),
@@ -216,5 +264,5 @@ combo_t key_combos[] = {
     [TAB]       = COMBO(x_c_combo,      KC_TAB),
     [FUNC]      = COMBO(l_u_y_combo,    MO(_FUNC)),
     [DEL]       = COMBO(u_y_combo,      KC_DEL),
-    [SHORTCUTS] = COMBO(comm_dot_combo, OSM(MOD_LCTL)),
+    [SHORTCUTS] = COMBO(comm_dot_combo, OSL(_SHORTCUTS)),
 };
