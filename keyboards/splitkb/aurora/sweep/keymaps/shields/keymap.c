@@ -258,7 +258,7 @@ const uint16_t PROGMEM u_y_combo[]      = { KC_U, KC_Y,                         
 const uint16_t PROGMEM comm_dot_combo[] = { KC_COMM, KC_DOT,                        COMBO_END};
 
 combo_t key_combos[] = {
-    [MEDIA]     = COMBO(w_f_p_combo,    MO(_FUNC)),
+    [MEDIA]     = COMBO(w_f_p_combo,    MO(_MEDIA)),
     [ESC]       = COMBO(w_f_combo,      KC_ESC),
     [NUM]       = COMBO(r_s_combo,      MO(_NUM)),
     [TAB]       = COMBO(x_c_combo,      KC_TAB),
